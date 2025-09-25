@@ -3,6 +3,8 @@ name: Publish Docker image
 on:
   push:
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 6'
 
 jobs:
   push_to_registry:
@@ -16,6 +18,13 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v5
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6

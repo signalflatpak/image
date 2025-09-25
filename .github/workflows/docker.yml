@@ -23,5 +23,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io:signaflatpak/image:latest
+          tags: ghcr.io/signaflatpak/image:latest
 
